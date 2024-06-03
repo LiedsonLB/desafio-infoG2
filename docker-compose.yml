@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  zssnDB:
+    image: postgres:alpine
+    container_name: zssnDB_container
+    environment:
+      POSTGRES_DB: zssnDB
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
