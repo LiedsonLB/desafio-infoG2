@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 
 import initialPage from '../pages/PageInitial.vue';
 import formSurvivor from '../components/formSurvivor.vue';
+import ModalResources from '../components/modalResources.vue';
 
 const routes = [
   {
@@ -12,10 +13,15 @@ const routes = [
     component: initialPage,
   },
   {
+    path: '/modal',
+    name: 'model',
+    component: ModalResources,
+  },
+  {
     path: '/test',
     name: 'test',
     component: formSurvivor,
-  }
+  },
 ];
 const router = createRouter({
   history: createWebHistory (),
