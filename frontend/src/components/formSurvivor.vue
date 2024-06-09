@@ -1,286 +1,228 @@
 <template>
-    <div id="screen-login" v-if="mostrarDiv">
+  <form @submit.prevent="proceed">
+    <span>
+      <label class="container-input">
+        <input
+          v-model="name"
+          type="text"
+          class="input"
+          placeholder="Nome"
+          autocomplete="off"
+        />
+      </label>
+    </span>
+    <span>
+      <label class="container-input">
+        <input
+          v-model="age"
+          type="text"
+          class="input"
+          placeholder="Idade"
+          autocomplete="off"
+        />
+      </label>
+    </span>
+    <span>
+      <label class="container-input">
+        <input
+          v-model="gender"
+          type="text"
+          class="input"
+          placeholder="Sexo"
+          autocomplete="off"
+        />
+      </label>
+    </span>
+    <div class="coordinates-container">
+      <span>
+        <label class="container-input-coordinates">
+          <input
+            v-model="latitude"
+            type="text"
+            class="input"
+            placeholder="Latitude"
+            autocomplete="off"
+          />
+        </label>
+      </span>
+      <span>
+        <label class="container-input-coordinates">
+          <input
+            v-model="longitude"
+            type="text"
+            class="input"
+            placeholder="Longitude"
+            autocomplete="off"
+          />
+        </label>
+      </span>
     </div>
-  </template>
-  
-  <script>
-  
-  export default {
-    name: "testApp",
-    components: {
-    },
-    data() {
-      return {
-        logo: "img/logo.png",
-        mostrarDiv: true,
-        cadasterSelection: false,
-        loginSelection: true,
-      };
-    },
-    mounted() {
-      // Após um atraso de 3 segundos, ocultar a div
-      setTimeout(() => {
-        this.mostrarDiv = false;
-      }, 5000);
-    },
-    methods: {
-      SelectionBtn(option) {
-        if (option === 'login') {
-          this.loginSelection = true;
-          this.cadasterSelection = false;
-          //this.$refs.loginForm.selectLogin(); // Chame um método no componente filho se necessário
-        } else if (option === 'cadastro') {
-          this.loginSelection = false;
-          this.cadasterSelection = true;
-          //this.$refs.loginForm.selectCadastro(); // Chame um método no componente filho se necessário
+    <div class="container-button-initial">
+      <button type="submit" class="button-initial" @click="submitForm">
+        Prosseguir
+      </button>
+    </div>
+  </form>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  name: "formSurvivor",
+  components: {},
+  data() {
+    return {
+      name: "",
+      age: "",
+      gender: "",
+      latitude: "",
+      longitude: "",
+    };
+  },
+  methods: {
+    async proceed() {
+      if (this.isFormValid()) {
+        try {
+          // Convertendo latitude e longitude em numero
+          const idade = parseFloat(this.age);
+          const latitude = parseFloat(this.latitude);
+          const longitude = parseFloat(this.longitude);
+
+          const response = await axios.post(
+            "http://127.0.0.1:8000/api/survivors/",
+            {
+              name: this.name,
+              age: idade,
+              gender: this.gender,
+              last_location_latitude: latitude,
+              last_location_longitude: longitude,
+              infected: true,
+              resources: [],
+            }
+          );
+          console.log(response.data);
+        } catch (error) {
+          console.error(error);
         }
-      },
+      } else {
+        alert("Por favor, preencha todos os campos.");
+      }
     },
-  };
-</script>  
-<style scoped>
-#screen-login {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(#dae5ed, #589dd3, #214969);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    isFormValid() {
+      return (
+        this.name && this.age && this.gender && this.latitude && this.longitude
+      );
+    },
+  },
+};
+</script>
+  
+  <style scoped>
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-/* Escolha Login */
-#screen-page-login {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-family: var(--Font-letter);
+
+form span label {
+  margin: 0 auto;
 }
-#header-login{
-    padding: 0px 4rem;
-    height: 8%;
-    background-color: var(--blue-color);
-    color: var(--letter-color);
-    margin: 0 !important;
+
+.container-button-initial {
+  width: 100%;
 }
-#footer-login{
-    padding: 0px 4rem;
-    height: 8%;
-    text-align: end;
-    font-weight: bold;
-    background-color: var(--blue-color);
-    color: var(--letter-color);
+
+.container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#container-apresention-login {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-}
-#container-left, #container-right {
-    width: 50%;
-}
-#container-left {
-    overflow: hidden;
-    height: 100%;
-}
-#container-left img{
-    object-fit: cover;
-    width: 100%;
-}
-.colorido{
-    color: var(--blue-color);
-    font-weight: 900 !important;
-}
-#container-right {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-#text {
-    width: 80%;
-    text-align: start;
-    margin: 0 auto;
-}
-#text h1{
-    margin: 0;
-    margin-bottom: 0.5rem !important;
-    font-weight: 100;
-}
-#text p {
-    margin: 0;
-    font-weight: 600;
-}
-#login-form h2,#cadastro-form h2 {
-    margin: 0;
-}
-#login-form, #cadastro-form {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    height: 100%;
-    justify-content: center;
-}
-#option-loginbtn {
-    display: flex;
-    gap: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    width: 70%;
-}
-#option-loginbtn button{
-    font-weight: bold;
-    padding: 10px 0px;
-    text-align: center;
-    border: none;
-    text-decoration: none;
-    border-radius: 5px;
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
-    width: 50%;
-    margin: 0 auto;
-    background: #e3e3e3;
-    color: gray;
-}
-#login-form input, #cadastro-form input{
-    outline: none;
-    font-weight: bold;
-    padding: 15px 0px 15px 50px;
-    border-radius: 5px;
-    font-family: 'Montserrat', sans-serif;
-    border: none;
-    width: 88%;
-    margin: 0 auto;
-    color: var(--blue-color);
-    margin-bottom: 10px;
-    background: #e3e3e3;
-}
-#login-form label, #cadastro-form label {
-    font-weight: bolder;
-}
-.logsbtn {
-    font-size: 0.9rem;
-    font-weight: bold;
-    padding: 15px 0px;
-    text-align: center;
-    border: 1.5px solid var(--blue-color);
-    text-decoration: none;
-    border-radius: 5px;
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
-    width: 100%;
-    margin: 0 auto;
-}
-#loginBtn {
-    background-color: #214969;
-    color: #fff;
-}
-#loginBtn:hover {
-    background-color: #0293c4;
-    border-color: #0293c4;
-}
-#CadasterBtn {
-    background-color: transparent;
-    color: var(--blue-color);
-}
-#CadasterBtn:hover {
-    background-color: #f3f3f3;
-}
-#social-midia {
-    margin-top: 1rem;
-    display: flex;
-    gap: 3rem;
-    align-items: center;
-    justify-content: center;
-}
-#social-midia a i {
-    padding: 8px 12px;
-    border-radius: 50%;
-    background-color: var(--blue-color);
-    color: #fff;
-}
-.social-midia {
-    font-size: 1.5rem !important;
-    color: var(--blue-color) !important;
-}
-.selecionado {
-    background: var(--blue-color) !important;
-    color: var(--letter-color) !important;
-}
-/* Estilos para o campo de entrada de email */
-.input-group {
+
+.container-input {
   position: relative;
+  display: block;
+  min-width: 250px;
+  max-width: 500px;
+  display: flex;
+  border-radius: var(--radious-default);
+  border: 2px solid #373737;
+  padding: 15px 0px 15px 20px;
+  text-align: left;
+  background-color: var(--color-white);
 }
 
-/* Estilos para o ícone do envelope */
-.input-group-text {
-    background-color: #e3e3e3;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    top: 20%;
-    left: 20px;
-    font-size: 1.2rem;
-    color: var(--blue-color);
+.coordinates-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 524px;
+  margin: 0 auto !important;
+  width: 100%;
 }
 
-/* Estilos para o campo de entrada de senha */
-.password-input-container {
+.container-input-coordinates {
   position: relative;
+  display: block;
+  max-width: 500px;
+  display: flex;
+  border-radius: var(--radious-default);
+  border: 2px solid #373737;
+  padding: 15px 0px 15px 20px;
+  text-align: left;
+  background-color: var(--color-white);
 }
 
-/* Estilos para o ícone do olho (senha) */
-#password-toggle {
-    position: absolute;
-    top: 40%;
-    right: 20px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 1.5em;
-    color: var(--blue-color);
+.coordinates-container span {
+  width: 50%;
 }
-.campo-cadastro {
-    display: none;
+
+.container-input .input,
+.container-input-coordinates input {
+  outline: none;
+  border: none;
+  color: var(--color-light-gray);
+  font-size: 16px;
+  background-color: transparent;
+  width: 100%;
 }
-@media (max-width: 740px) {
-    #container-left {
-        display: none !important;
-    }
-    #container-right {
-      height: 90%;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-    }
-    #login-form, #cadastro-form {
-        width: 100%;
-    }
-    #footer-login{
-        padding: 0 !important;
-        font-size: 14px;
-        text-align: center;
-    }
-    #container-apresention-login {
-        width: 85% !important;
-    }
-    #container-right h1 {
-        font-size: 1.3rem;
-    }
-    #text p {
-        font-size: 0.9rem !important;
-    }
-    .logsbtn {
-        width: 100%;
-    }
-    #option-loginbtn {
-    width: 100%;
-    }
+
+.container-input .input:focus {
+  border: none;
+}
+
+.container-input:has(.input:focus),
+.container-input-coordinates:has(input:focus) {
+  border: 2px solid var(--color-black);
+  box-shadow: 2px 4px 6px var(--color-red);
+  transition: 0.2s;
+}
+
+.button-initial {
+  background-color: #8a0303;
+  color: #fff;
+  padding: 15px 8px 15px 10px;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 524px;
+  border-radius: var(--radious-default);
+  font-weight: 500;
+  font-family: var(--font-staatliches);
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 1;
+  border: none;
+  transition: 0.3s ease;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.button-initial:hover {
+  background-color: var(--hover-btn);
 }
 </style>
+  

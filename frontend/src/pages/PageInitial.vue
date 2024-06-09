@@ -7,70 +7,40 @@
       <div class="container-right-initial">
         <div class="container-form">
           <h1>ZSSN</h1>
-          <h2>Sobrevivente Informe seus dados</h2>
-          <form @submit.prevent="proceed">
-            <span>
-              <label class="container-input">
-                <input
-                  v-model="name"
-                  type="text"
-                  class="input"
-                  placeholder="Nome"
-                  autocomplete="off"
-                />
-              </label>
-            </span>
-            <span>
-              <label class="container-input">
-                <input
-                  v-model="age"
-                  type="text"
-                  class="input"
-                  placeholder="Idade"
-                  autocomplete="off"
-                />
-              </label>
-            </span>
-            <span>
-              <label class="container-input">
-                <input
-                  v-model="gender"
-                  type="text"
-                  class="input"
-                  placeholder="Sexo"
-                  autocomplete="off"
-                />
-              </label>
-            </span>
-            <span>
-              <label class="container-input">
-                <input
-                  v-model="location"
-                  type="text"
-                  class="input"
-                  placeholder="Última Localização"
-                  autocomplete="off"
-                />
-              </label>
-            </span>
-            <div class="container-button-initial">
-              <button type="submit" class="button-initial">Prosseguir</button>
-            </div>
-          </form>
+          <h2>Sobrevivente, informe seus dados</h2>
+          <FormSurvivor @formSubmitted="handleFormSubmission" />
         </div>
+        <footer>
+          Todos os direitos reservados © ZSSN - Liedson Barros 2024
+        </footer>
       </div>
     </div>
-    <modal-resources v-if="showModal" :name="name" />
+    <NotificacaoPopup
+      v-if="showPopup"
+      :type="popupType"
+      :title="popupTitle"
+      :text="popupText"
+      @close="handlePopupClose"
+    />
+    <ModalResources
+      v-if="showModalResouces"
+      @close="handleModalResourcesClose"
+      :name="name"
+    />
   </div>
 </template>
 
 <script>
+import FormSurvivor from "@/components/formSurvivor.vue";
 import ModalResources from "@/components/modalResources.vue";
+import NotificacaoPopup from "@/components/NotificationPopup.vue";
 
 export default {
   name: "PageInitialApp",
   components: {
     ModalResources,
+    NotificacaoPopup,
+    FormSurvivor,
   },
   data() {
     return {
@@ -78,20 +48,34 @@ export default {
       age: "",
       gender: "",
       location: "",
-      showModal: false,
+      showModalResouces: false,
+      showPopup: false,
+      popupType: "alert",
+      popupTitle: "Atenção",
+      popupText: "Por favor, preencha todos os campos.",
     };
   },
   methods: {
-    proceed() {
-      if (this.name && this.age && this.gender && this.location) {
-        this.showModal = true;
-      } else {
-        alert("Por favor, preencha todos os campos.");
+    handleFormSubmission(data) {
+      if (!data.formValid) {
+        this.showPopup = true;
+        setTimeout(() => {
+          this.showPopup = false;
+        }, 3000);
+        return;
       }
+      this.showModalResouces = true;
+    },
+    handlePopupClose() {
+      this.showPopup = false;
+    },
+    handleModalResourcesClose() {
+      this.showModalResouces = false;
     },
   },
 };
 </script>
+
 <style scoped>
 .screen {
   height: 100%;
@@ -134,7 +118,7 @@ export default {
 
 .container-form {
   width: 90%;
-  height: 100%;
+  height: calc(100% - 30px);
   margin: 0 auto;
   text-align: center;
   display: flex;
@@ -148,7 +132,6 @@ export default {
   font-size: 6rem;
   padding: 0;
   margin: 1rem;
-  filter: drop-shadow(2px 4px 6px var(--color-black));
 }
 
 .container-form h2 {
@@ -159,82 +142,10 @@ export default {
   filter: drop-shadow(2px 4px 6px var(--color-black));
 }
 
-form {
+footer {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-form span label {
-  margin: 0 auto;
-}
-
-.container-button-initial {
-  width: 100%;
-}
-
-.container {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.container-input {
-  position: relative;
-  display: block;
-  min-width: 250px;
-  max-width: 500px;
-  display: flex;
-  border-radius: var(--radious-defalt);
-  border: 2px solid #373737;
-  padding: 15px 0px 15px 20px;
-  text-align: left;
-  background-color: var(--color-white);
-}
-
-.container-input .input {
-  outline: none;
-  border: none;
-  color: var(--color-light-gray);
-  font-size: 16px;
-  background-color: transparent;
-  width: 100%;
-}
-
-.container-input .input:focus {
-  border: none;
-}
-
-.container-input:has(.input:focus) {
-  border: 2px solid var(--color-black);
-  transition: 0.2s;
-}
-
-.button-initial {
-  background-color: #8a0303;
-  color: #fff;
-  padding: 15px 8px 15px 10px;
-  font-size: 1.2rem;
-  width: 100%;
-  border-radius: var(--radious-defalt);
-  font-weight: 500;
-  font-family: var(--font-staatliches);
-  text-decoration: none;
-  cursor: pointer;
-  line-height: 1;
-  border: none;
-  transition: 0.3s ease;
   text-align: center;
-  margin: 1rem 0;
-  min-width: 250px;
-  max-width: 522px;
-}
-
-.button-initial:hover {
-  background-color: var(--hover-btn);
+  font-family: var(--font-bebas);
+  color: var(--color-white);
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal" v-if="isOpen">
     <div class="container-modal">
       <div class="header-modal">
         <button type="button" class="close-btn" @click="closeModal">×</button>
@@ -10,11 +10,13 @@
         </h2>
 
         <section id="resource-list">
-          <div class="resource" v-for="(count, resource) in resources" :key="resource">
+          <div
+            class="resource"
+            v-for="(count, resource) in resources"
+            :key="resource"
+          >
             <h3>{{ resourceNames[resource] }}</h3>
-
             <svg v-html="icons[resource]"></svg>
-
             <div class="count-resource">
               <span class="prev-count" @click="updateCount(resource, false)"
                 >&#10094;</span
@@ -45,7 +47,8 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
+  setup(_, { emit }) {
+    const isOpen = ref(true);
     const resources = ref({
       water: 0,
       food: 0,
@@ -73,30 +76,31 @@ export default defineComponent({
       ammo: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M528 56c0-13.3-10.7-24-24-24s-24 10.7-24 24v8H32C14.3 64 0 78.3 0 96V208c0 17.7 14.3 32 32 32H42c20.8 0 36.1 19.6 31 39.8L33 440.2c-2.4 9.6-.2 19.7 5.8 27.5S54.1 480 64 480h96c14.7 0 27.5-10 31-24.2L217 352H321.4c23.7 0 44.8-14.9 52.7-37.2L400.9 240H432c8.5 0 16.6-3.4 22.6-9.4L477.3 208H544c17.7 0 32-14.3 32-32V96c0-17.7-14.3-32-32-32H528V56zM321.4 304H229l16-64h105l-21 58.7c-1.1 3.2-4.2 5.3-7.5 5.3zM80 128H464c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>`,
     };
 
+    const closeModal = () => {
+      isOpen.value = false;
+      emit("close");
+    };
+
     const updateCount = (resource, increment) => {
       if (increment) {
         resources.value[resource]++;
-      } else {
-        resources.value[resource] = Math.max(0, resources.value[resource] - 1);
+      } else if (resources.value[resource] > 0) {
+        resources.value[resource]--;
       }
     };
 
     const sendResources = () => {
-      console.log("Resources sent:", resources.value);
-      // logic to send the resources
-    };
-
-    const closeModal = () => {
-      // logic to close the modal
+      console.log("Enviando recursos:", resources.value);
     };
 
     return {
+      isOpen,
       resources,
       resourceNames,
       icons,
+      closeModal,
       updateCount,
       sendResources,
-      closeModal,
     };
   },
 });
@@ -121,7 +125,7 @@ export default defineComponent({
   animation: downAcess 0.3s ease-in-out;
   background: var(--color-dark-gray);
   border: none;
-  border-radius: 20px;
+  border-radius: 5px;
   box-shadow: 20px 20px 50px #00000080;
   display: flex;
   flex-direction: column;

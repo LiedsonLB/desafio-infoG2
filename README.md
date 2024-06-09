@@ -12,61 +12,50 @@ ZSSN é o último vestígio de esperança em um mundo dilacerado, uma rede socia
 
 ## Design
 
-- **Figma:** [NeoBoard Figma](https://www.figma.com/file/FZsYI4I22unJ1Wg7HDTk96/NeoBoard?type=design&node-id=0-1&mode=design&t=tx0rR3XEPm7Oiu2d-0)
+- **Figma:** [ZSSN Figma](https://www.figma.com/design/Sg56PrGMQTkzuMh8UScyP4/ZSSN?node-id=0-1&t=0QHMiXPD4MQoceYy-0)
 
-## Funcionalidades
-
-- **Interface:**
-  - Área que recebe relatório das vendas em Excel para importação de dados
-
-- **Home:**
-  - Vendas, clientes, despesas e cálculo de lucro (geral)
-  - Gráficos: linhas (capital de período), pizza (venda dos produtos), colunas (vendas das regiões), cards (porcentagem de comparação com o mês anterior), ranking (produto e região), cotações, footer
-
-- **Regiões:**
-  - Vendas, clientes, despesas e cálculo de lucro
-
-- **Produtos:**
-  - Informação do produto (nome, categoria, descrição, valor)
-  - Números de vendas, capital bruto
-  - Informações dos segmentos dos produtos (capital bruto, porcentagem do produto)
-  - Histórico de vendas do mês, porcentagem de comparação com o mês anterior
-
-- **Pagamentos:**
-  - Gráfico geral das formas de pagamento
-  - Detalhes para cartões (crédito e débito), PIX, boleto, etc.
+## Relatório de trabalho
+- 03/06/2024 - criação do designer figma e estrutura do projeto (6h)
+- 04/06/2024 - criação da models, views, e pastas da api (4h30)
+- 05/06/2024 - criação da página Login e Modal Recursos (4h)
+- 06/06/2024 - (0h)
+- 07/06/2024 - (0h)
+- 08/06/2024 - Teste das rotas de api interagindo com front (3h)
+- 09/06/2024 - página de sobrevivente e layouts (6h)
 
 ## Testes
 
-- Teste de carregamento de componentes HTML
-- Teste de tipo de documento
-- Envio de dados normal
-- Testes funcionais
-- Testes de banco e API
-- Testes de sistema
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cypressio/cypressio-original.svg" alt="cypress" height="30" width="40" style="margin: 0 auto; width: 100%"> <br />
+<p style="text-align: center">Ferramenta de Testes: Cypress</p>
+
+- Teste de carregamento de componentes HTML ❌
+- Envio de dados normal ❌
+- Testes funcionais ❌
+- Testes de banco e API ❌
+- Testes de sistema ❌
 
 # Conhecimentos utilizados:
 <div style="display: flex; flex-wrap: wrap; gap: 5px; justify-content:center">
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML" height="30" width="40">
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS" height="30" width="40">
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-plain.svg" alt="typescript" height="30" width="40">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="30" width="40">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="nodejs" height="30" width="40">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" height="30" width="40">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Git" height="30" width="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="django" height="30" width="40" >
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" alt="npm" height="30" width="40">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="30" width="40">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" height="30" width="40">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" height="30" width="40">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/axios/axios-plain-wordmark.svg" height="30" width="40">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" height="30" width="40">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" height="30" width="40">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" height="30" width="40">        
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" height="30" width="40">        
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="github" height="30" width="40">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="vscode" height="30" width="40">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" height="30" width="40"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Git" height="30" width="40"/>     
 </div>
+<br />
 
-## Clonando o Repositório
+# Rodando o Projeto
+
+## Clone o Repositório
 
 1. Abra o terminal.
 
@@ -78,7 +67,16 @@ ZSSN é o último vestígio de esperança em um mundo dilacerado, uma rede socia
 git clone https://github.com/LiedsonLB/desafio-infoG2.git
 ```
 
-## Executando o Vue
+## Execute o PostgreSQL com Docker Compose
+
+1. Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema.
+2. Navegue até o diretório `desafio_ZSSN`.
+3. Execute o seguinte comando para iniciar o contêiner:
+``` bash
+docker-compose up -d
+```
+
+## Execute o Vue
 
 1. Navegue até o diretório<br/>
 `desafio-infoG2/desafio_ZSSN/frontend`.
@@ -100,7 +98,7 @@ ou
 yarn serve
 ```
 
-## Executando o Django
+## Execute o Django
 
 1. Navegue até o diretório<br/>
 `desafio-infoG2/desafio_ZSSN/backend`.
@@ -112,14 +110,6 @@ pip install -r requirements.txt
 3. Execute o servidor Django:
 ``` bash
 python manage.py runserver
-```
-## Executando o Docker Compose com PostgreSQL
-
-1. Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema.
-2. Navegue até o diretório `desafio_ZSSN`.
-3. Execute o seguinte comando para iniciar os contêineres:
-``` bash
-docker-compose up -d
 ```
 
 ## Releases
