@@ -9,6 +9,12 @@ class SurvivorViewSet(viewsets.ModelViewSet):
     queryset = Survivor.objects.all()
     serializer_class = SurvivorSerializer
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     @action(detail=True, methods=['patch'])
     def update_location(self, request, pk=None):
         survivor = self.get_object()

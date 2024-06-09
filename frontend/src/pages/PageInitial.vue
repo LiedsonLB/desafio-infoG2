@@ -132,6 +132,7 @@ export default {
   font-size: 6rem;
   padding: 0;
   margin: 1rem;
+  filter: drop-shadow(2px 4px 6px var(--color-black));
 }
 
 .container-form h2 {
