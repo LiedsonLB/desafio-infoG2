@@ -4,7 +4,7 @@
 [![Forks](https://img.shields.io/github/forks/LiedsonLB/desafio-infoG2)](https://github.com/LiedsonLB/desafio-infoG2/network/members)
 [![Contribuidores](https://img.shields.io/github/contributors/LiedsonLB/desafio-infoG2)](https://github.com/LiedsonLB/desafio-infoG2/graphs/contributors)
 [![Pull Requests Abertos](https://img.shields.io/github/issues-pr/LiedsonLB/desafio-infoG2)](https://github.com/LiedsonLB/desafio-infoG2/pulls)
-[![Última Atualização](https://img.shields.io/github/last-commit/LiedsonLB/desafio-infoG2)](https://github.com/LiedsonLB/desafio-infoG2/commits/master)
+[![Última Atualização](https://img.shields.io/github/last-commit/LiedsonLB/desafio-infoG2)](https://github.com/LiedsonLB/desafio-infoG2/commits/master) 
 
 ![NeoBoard](/img//zssn_initialPage.png)
 
