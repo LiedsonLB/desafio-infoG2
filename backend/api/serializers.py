@@ -1,13 +1,10 @@
-# serializers.py
 from rest_framework import serializers
 from .models import Survivor, Resource
 
 class ResourceSerializer(serializers.ModelSerializer):
-    survivor = serializers.PrimaryKeyRelatedField(queryset=Survivor.objects.all())
-
     class Meta:
         model = Resource
-        fields = ['id', 'resource_type', 'quantity', 'survivor']
+        fields = ['id', 'resource_type', 'quantity']
 
 class SurvivorSerializer(serializers.ModelSerializer):
     resources = ResourceSerializer(many=True)

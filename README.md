@@ -18,8 +18,8 @@ ZSSN é o último vestígio de esperança em um mundo dilacerado, uma rede socia
 - 03/06/2024 - criação do designer figma e estrutura do projeto (6h)
 - 04/06/2024 - criação da models, views, e pastas da api (4h30)
 - 05/06/2024 - criação da página Login e Modal Recursos (4h)
-- 06/06/2024 - (0h)
-- 07/06/2024 - (0h)
+- 06/06/2024 - Apresentação Faculdade (0h)
+- 07/06/2024 - Entrega de Projeto Final Faculdade (0h)
 - 08/06/2024 - Teste das rotas de api interagindo com front (3h)
 - 09/06/2024 - página de sobrevivente e layouts (6h)
 
@@ -69,18 +69,19 @@ git clone https://github.com/LiedsonLB/desafio-infoG2.git
 
 ## Execute o PostgreSQL com Docker Compose
 
-1. Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema.
-2. Navegue até o diretório `desafio_ZSSN`.
-3. Execute o seguinte comando para iniciar o contêiner:
+### 1. Certifique-se de ter o Docker e o DockerCompose instalados em seu sistema.
+### 2. Navegue até o diretório
+`desafio_ZSSN`.
+### 3. Execute o seguinte comando para iniciar o contêiner:
 ``` bash
 docker-compose up -d
 ```
 
 ## Execute o Vue
 
-1. Navegue até o diretório<br/>
+### 1. Navegue até o diretório<br/>
 `desafio-infoG2/desafio_ZSSN/frontend`.
-2. Instale as dependências utilizando npm ou yarn:
+### 2. Instale as dependências utilizando npm ou yarn:
 ``` bash
 npm install
 ```
@@ -89,7 +90,7 @@ ou
 yarn install
 ```
 
-3. Inicie o servidor de desenvolvimento:
+### 3. Inicie o servidor de desenvolvimento:
 ``` bash
 npm run serve
 ```
@@ -100,14 +101,32 @@ yarn serve
 
 ## Execute o Django
 
-1. Navegue até o diretório<br/>
+### 1. Navegue até o diretório<br/>
 `desafio-infoG2/desafio_ZSSN/backend`.
-2. Instale as dependências do Python, geralmente feito com pip:
+
+### 2. Crie um ambiente virtual
+``` bash
+python -m venv (Nome_do_ambiente)
+```
+
+### 3.  Ative o ambiente virtual. No Windows, você pode fazer isso com o seguinte comando:
+
+``` bash
+venv\Scripts\activate
+```
+
+No macOS/Linux, você pode fazer isso com o seguinte comando:
+
+``` bash
+source venv/bin/activate
+```
+
+### 3. Instale as dependências do Python, geralmente feito com pip:
 
 ``` bash
 pip install -r requirements.txt
 ```
-3. Execute o servidor Django:
+### 4. Execute o servidor Django:
 ``` bash
 python manage.py runserver
 ```
