@@ -5,6 +5,7 @@ class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
         fields = ['id', 'resource_type', 'quantity']
+        read_only_fields = ['id']
 
 class SurvivorSerializer(serializers.ModelSerializer):
     resources = ResourceSerializer(many=True)
@@ -12,6 +13,15 @@ class SurvivorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Survivor
         fields = ['id', 'name', 'age', 'gender', 'last_location_latitude', 'last_location_longitude', 'infected', 'resources']
+
+    def create(self, validated_data):
+        resources_data = validated_data.pop('resources', [])
+        survivor = Survivor.objects.create(**validated_data)
+
+        for resource_data in resources_data:
+            Resource.objects.create(survivor=survivor, **resource_data)
+
+        return survivor
 
     def update(self, instance, validated_data):
         resources_data = validated_data.pop('resources', [])
