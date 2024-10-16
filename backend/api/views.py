@@ -2,8 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import Survivor, Resource
-from .serializers import SurvivorSerializer, ResourceSerializer
-from django.db.models import Sum 
+from .serializers import SurvivorSerializer
+from django.db.models import Sum
 
 class SurvivorViewSet(viewsets.ModelViewSet):
     queryset = Survivor.objects.all()

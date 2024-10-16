@@ -1,7 +1,7 @@
 from django.db import models
 
 class Survivor(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     age = models.IntegerField()
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])
     last_location_latitude = models.FloatField()

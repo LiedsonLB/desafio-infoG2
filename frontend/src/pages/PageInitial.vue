@@ -79,7 +79,7 @@ export default {
 <style scoped>
 .screen {
   height: 100%;
-  min-height: 100vh;
+  min-height: 300vh;
 }
 
 .initial-page {
